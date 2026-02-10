@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Water Quality Assessment Design System - Dark Theme with Water Effects */
+
+@layer base {
+  :root {
+    /* Dark water-themed color palette */
+    --background: 220 25% 8%;
+    --foreground: 200 20% 95%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 200 15% 92%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 200 20% 95%;
+
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 25% 8%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 200 15% 85%;
+
+    --muted: 220 12% 15%;
+    --muted-foreground: 200 8% 65%;
+
+    --accent: 185 85% 45%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 200 20% 95%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 195 100% 50%;
+
+    /* Water-themed custom colors */
+    --water-primary: 195 100% 50%;
+    --water-secondary: 185 85% 45%;
+    --water-deep: 210 90% 25%;
+    --water-light: 190 80% 65%;
+    --water-mist: 200 40% 85%;
+    
+    /* Gradients */
+    --gradient-water: linear-gradient(135deg, hsl(var(--water-deep)), hsl(var(--water-primary)));
+    --gradient-flow: linear-gradient(90deg, hsl(var(--water-primary)), hsl(var(--water-secondary)), hsl(var(--water-primary)));
+    --gradient-ripple: radial-gradient(circle, hsl(var(--water-primary) / 0.3), transparent 70%);
+    
+    /* Effects */
+    --shadow-water: 0 10px 40px hsl(var(--water-primary) / 0.2);
+    --shadow-glow: 0 0 30px hsl(var(--water-primary) / 0.4);
+    --blur-backdrop: blur(10px);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+  }
+}
+
+/* Water Animation Effects */
+@layer components {
+  .water-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .water-ripple::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-flow);
+    animation: flow 3s linear infinite;
+    opacity: 0.1;
+  }
+
+  .water-droplet {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--water-primary));
+    border-radius: 50%;
+    animation: droplet 4s ease-in-out infinite;
+  }
+
+  .floating-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--water-light) / 0.6);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .water-surface {
+    background: var(--gradient-water);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .water-surface::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--water-primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--water-secondary) / 0.1) 0%, transparent 50%);
+    animation: wave 4s ease-in-out infinite;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes flow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes droplet {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  25% { transform: translateY(-10px) translateX(5px) rotate(90deg); }
+  50% { transform: translateY(-5px) translateX(-5px) rotate(180deg); }
+  75% { transform: translateY(-15px) translateX(3px) rotate(270deg); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
